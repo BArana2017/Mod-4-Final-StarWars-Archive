@@ -1,0 +1,93 @@
+* {
+    max-width: 2000px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui;
+    }
+
+.nav-list {
+    display: flex;
+    justify-content: right;
+    gap: 32px;
+    padding: 32px 0px;
+    margin-right: 32px;
+    list-style-type: none;
+    color: yellow;
+    font-size: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.opening {
+    color: yellow;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background-image: url("assets/death-star.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.site-title {
+    font-size: 62px;
+    font-weight: 700;
+    margin: 100px 0px 24px 0px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-subtitle {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 32px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-button {
+    font-size: 16px;
+    color: rgb(118, 118, 118);
+    padding: 12px 32px;
+    margin: 8px 0px;
+    width:190px;
+    background-color:rgb(234, 234, 1);
+    cursor: pointer;
+    border-radius: 500px;
+    text-decoration: none;
+    border-color: white;
+    position: relative;
+    left: 63%;
+    transition: background-color 300ms, color 300ms;}
+
+    .search__input    {
+    width: max-content;
+    border-radius: 500px; 
+    border: 2px solid rgb(201, 202, 203);
+    background-color: white;
+    padding: 20px 192px 20px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute; 
+    transition: border-color 300ms;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(229, 231, 235);
+    padding: 20px 192px 20px 32px;
+    transition: border-color 300ms;
+}
