@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
+<nav class="test">
     <ul class="nav-list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Characters</a></li>
+        <li><a href="#" class="nav__link">Home</a></li>
+        <li><a href="#" class="nav__link">Characters</a></li>
     </ul>
 </nav>    
 <section class="opening">
+    <div class="test">
     <div>
 <h1 class="site-title">Star Wars Character Archive</h1>
 <h2 class="site-subtitle">Explore the universe of Star Wars characters</h2>
@@ -25,6 +26,31 @@
         <input type="text" class="search__input" placeholder="Search for a character...">
         <a href="#"><button class="search-button">Search</button></a>
     </div>
+    </div>
 </section>
+<section class="search">
+  <div class="container">
+    <h3>Filter by Film Appearances</h3>
+
+    <!-- values -->
+    <div class="values">
+      <span id="minVal">1</span> - <span id="maxVal">9</span> films
+    </div>
+
+    <!-- slider -->
+    <div class="slider-container">
+      <div class="slider">
+        <input type="range" id="minRange" min="1" max="9" value="1">
+        <input type="range" id="maxRange" min="1" max="9" value="9">
+        <div class="progress" id="progress"></div>
+    </div> 
+    </div>
+    
+    <!-- characters -->
+    <div id="characterList"></div>
+
+  </div>
+</section>
+    <script src="script.js"></script>
 </body>
 </html>
