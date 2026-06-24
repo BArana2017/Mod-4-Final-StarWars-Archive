@@ -13,7 +13,6 @@
 <nav class="test">
     <ul class="nav-list">
         <li><a href="#" class="nav__link">Home</a></li>
-        <li><a href="#" class="nav__link">Characters</a></li>
     </ul>
 </nav>    
 <section class="opening">
@@ -23,27 +22,28 @@
 <h2 class="site-subtitle">Explore the universe of Star Wars characters</h2>
     </div>
     <div class="search-bar">
-        <input type="text" class="search__input" placeholder="Search for a character...">
+        <input type="text" id="searchInput" placeholder="Search for a character...">
         <a href="#"><button class="search-button">Search</button></a>
     </div>
     </div>
 </section>
 <section class="search">
   <div class="container">
-    <h3>Filter by Film Appearances</h3>
-
+    <div class="filter-header">
+    <h3>Filter by Film Appearances:</h3>
     <!-- values -->
     <div class="values">
       <span id="minVal">1</span> - <span id="maxVal">9</span> films
     </div>
-  
+    </div>
     <!-- slider -->
     <div class="range-container">
-
   <div class="values">
+    <div class="slider-markers">
     <span id="minValue">1</span>
-    -
+    
     <span id="maxValue">9</span>
+    </div>
   </div>
 </div>
 <div class="slider-container">
@@ -55,7 +55,9 @@
   </div>
 </div>
     <!-- characters -->
-    <div id="characterList"></div>
+    <div id="characterList">
+        <div id="results"></div>
+    </div>
 
 </section>
     <script src="script.js"></script>
