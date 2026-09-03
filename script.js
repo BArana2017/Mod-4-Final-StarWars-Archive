@@ -42,22 +42,23 @@ updateSlider();
 
 // Characters
 
-const searchBar = document.getElementById("search-bar");
+const searchBar = document.getElementById("searchInput");
 const results = document.getElementById("results");
 
 let characters = [];
 
-fetch("https://akabab.github.io/starwars-api/api/all.json")
+fetch("https://swapi.info/api/people")
   .then((res) => res.json())
   .then((data) => {
     characters = data;
   });
 
-searchBar.addEventListener("input", (e) => {
-  const search = e.target.value.toLowerCase();
+  searchButton.addEventListener("click", () => {
+  const search = searchBar.value.toLowerCase();
+  const searchButton = document.getElementById("searchButton");
 
   results.innerHTML = characters
     .filter((character) => character.name.toLowerCase().includes(search))
-    .map((character) => `<p>${character.name}</p>`)
+    .map((character) => `<p class="character-card">${character.name}</p>`)
     .join("");
 });
