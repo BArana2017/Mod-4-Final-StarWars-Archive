@@ -58,7 +58,10 @@ fetch("https://swapi.info/api/people")
   const searchButton = document.getElementById("searchButton");
 
   results.innerHTML = characters
-    .filter((character) => character.name.toLowerCase().includes(search))
+    .filter(
+  (character) =>
+    character.name.toLowerCase().includes(search.toLowerCase()) &&
+    character.films.some((film) => [1, 2, 3, 4, 5, 6, 7, 8, 9].includes(film))
     .map((character) => `<p class="character-card">${character.name}</p>`)
     .join("");
 });
