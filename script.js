@@ -42,7 +42,6 @@ function getAllowedFilmIds() {
   }
 
   let filmIds = [];
-
   for (let i = min; i <= max; i++) {
     filmIds.push(i);
   }
@@ -52,12 +51,16 @@ function getAllowedFilmIds() {
 
 minRange.addEventListener("input", function () {
   updateSlider();
-  renderCharacters();
+  if (hasSearched) {
+    renderCharacters();
+  }
 });
 
 maxRange.addEventListener("input", function () {
   updateSlider();
-  renderCharacters();
+  if (hasSearched) {
+    renderCharacters();
+  }
 });
 
 updateSlider();
@@ -68,44 +71,35 @@ const searchButton = document.getElementById("searchButton");
 const results = document.getElementById("results");
 
 let characters = [];
+let hasSearched = false;
 
 function renderCharacters() {
   const search = searchBar.value.toLowerCase();
   const allowedFilmIds = getAllowedFilmIds();
 
-  let filteredCharacters = [];
+  let filteredCharacters = characters.filter(character => {
+    // Check if character's name matches the search
+    const matchesName = character.name.toLowerCase().includes(search);
+    
+    // Check if character appears in any of the allowed films
+    const hasRightFilm = character.films.some(filmUrl => {
+      const filmParts = filmUrl.split("/").filter(Boolean);
+      const movieId = parseInt(filmParts[filmParts.length - 1]);
+      return allowedFilmIds.includes(movieId);
+    });
 
-  for (let i = 0; i < characters.length; i++) {
-    let character = characters[i];
-    let matchesName = character.name.toLowerCase().includes(search);
-    let hasRightFilm = false;
+    return matchesName && hasRightFilm;
+  });
 
-    for (let j = 0; j < character.films.length; j++) {
-      let filmUrl = character.films[j];
-      let filmParts = filmUrl.split("/").filter(Boolean);
-      let movieId = parseInt(filmParts[filmParts.length - 1]);
-
-      for (let k = 0; k < allowedFilmIds.length; k++) {
-        if (movieId === allowedFilmIds[k]) {
-          hasRightFilm = true;
-        }
-      }
-    }
-
-    if (matchesName && hasRightFilm) {
-      filteredCharacters.push(character);
-    }
-  }
-
-  let html = "";
-
-  for (let i = 0; i < filteredCharacters.length; i++) {
-    html += '<p class="character-card">' + filteredCharacters[i].name + "</p>";
-  }
+  // Build the HTML for filtered characters
+  const html = filteredCharacters.map(character => 
+    `<p class="character-card">${character.name}</p>`
+  ).join("");
 
   results.innerHTML = html;
 }
 
+// Fetch characters from API
 fetch("https://swapi.info/api/people")
   .then(function (response) {
     if (!response.ok) {
@@ -115,18 +109,16 @@ fetch("https://swapi.info/api/people")
   })
   .then(function (data) {
     characters = data;
-    renderCharacters();
   })
   .catch(function (error) {
     console.log(error);
-    results.innerHTML =
-      "<p class='character-card'>Unable to load characters.</p>";
+    if (hasSearched) {
+      results.innerHTML =
+        "<p class='character-card'>Unable to load characters.</p>";
+    }
   });
 
 searchButton.addEventListener("click", function () {
-  renderCharacters();
-});
-
-searchBar.addEventListener("input", function () {
+  hasSearched = true;
   renderCharacters();
 });
