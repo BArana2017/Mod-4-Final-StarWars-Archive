@@ -7,61 +7,126 @@ const maxValue = document.getElementById("maxValue");
 const progress = document.getElementById("progress");
 
 function updateSlider() {
-
   let min = parseInt(minRange.value);
   let max = parseInt(maxRange.value);
 
-  // prevent crossing
   if (min > max) {
-    [min, max] = [max, min];
+    let temp = min;
+    min = max;
+    max = temp;
+    minRange.value = min;
+    maxRange.value = max;
   }
 
-  // update text
   minValue.textContent = min;
   maxValue.textContent = max;
 
-  // calculate %
-const minLimit = parseInt(minRange.min);
-const maxLimit = parseInt(minRange.max);
+  const minLimit = parseInt(minRange.min);
+  const maxLimit = parseInt(minRange.max);
 
-const minPercent = ((min - minLimit) / (maxLimit - minLimit)) * 100;
-const maxPercent = ((max - minLimit) / (maxLimit - minLimit)) * 100;
+  const minPercent = ((min - minLimit) / (maxLimit - minLimit)) * 100;
+  const maxPercent = ((max - minLimit) / (maxLimit - minLimit)) * 100;
 
-progress.style.left = minPercent + "%";
-progress.style.width = (maxPercent - minPercent) + "%";
-
-  // move progress bar
   progress.style.left = minPercent + "%";
-  progress.style.width = (maxPercent - minPercent) + "%";
+  progress.style.width = maxPercent - minPercent + "%";
 }
 
-minRange.addEventListener("input", updateSlider);
-maxRange.addEventListener("input", updateSlider);
+function getAllowedFilmIds() {
+  let min = parseInt(minRange.value);
+  let max = parseInt(maxRange.value);
+
+  if (min > max) {
+    let temp = min;
+    min = max;
+    max = temp;
+  }
+
+  let filmIds = [];
+
+  for (let i = min; i <= max; i++) {
+    filmIds.push(i);
+  }
+
+  return filmIds;
+}
+
+minRange.addEventListener("input", function () {
+  updateSlider();
+  renderCharacters();
+});
+
+maxRange.addEventListener("input", function () {
+  updateSlider();
+  renderCharacters();
+});
 
 updateSlider();
 
 // Characters
-
 const searchBar = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
 const results = document.getElementById("results");
 
 let characters = [];
 
+function renderCharacters() {
+  const search = searchBar.value.toLowerCase();
+  const allowedFilmIds = getAllowedFilmIds();
+
+  let filteredCharacters = [];
+
+  for (let i = 0; i < characters.length; i++) {
+    let character = characters[i];
+    let matchesName = character.name.toLowerCase().includes(search);
+    let hasRightFilm = false;
+
+    for (let j = 0; j < character.films.length; j++) {
+      let filmUrl = character.films[j];
+      let filmParts = filmUrl.split("/").filter(Boolean);
+      let movieId = parseInt(filmParts[filmParts.length - 1]);
+
+      for (let k = 0; k < allowedFilmIds.length; k++) {
+        if (movieId === allowedFilmIds[k]) {
+          hasRightFilm = true;
+        }
+      }
+    }
+
+    if (matchesName && hasRightFilm) {
+      filteredCharacters.push(character);
+    }
+  }
+
+  let html = "";
+
+  for (let i = 0; i < filteredCharacters.length; i++) {
+    html += '<p class="character-card">' + filteredCharacters[i].name + "</p>";
+  }
+
+  results.innerHTML = html;
+}
+
 fetch("https://swapi.info/api/people")
-  .then((res) => res.json())
-  .then((data) => {
+  .then(function (response) {
+    if (!response.ok) {
+      throw new Error("bad request");
+    }
+    return response.json();
+  })
+  .then(function (data) {
     characters = data;
+    renderCharacters();
+  })
+  .catch(function (error) {
+    console.log(error);
+    results.innerHTML =
+      "<p class='character-card'>Unable to load characters.</p>";
   });
 
-  searchButton.addEventListener("click", () => {
-  const search = searchBar.value.toLowerCase();
-  const searchButton = document.getElementById("searchButton");
+searchButton.addEventListener("click", function () {
+  renderCharacters();
+});
 
-  results.innerHTML = characters
-    .filter(
-  (character) =>
-    character.name.toLowerCase().includes(search.toLowerCase()) &&
-    character.films.some((film) => [1, 2, 3, 4, 5, 6, 7, 8, 9].includes(film))
-    .map((character) => `<p class="character-card">${character.name}</p>`)
-    .join("");
+searchBar.addEventListener("input", function () {
+  renderCharacters();
 });
