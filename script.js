@@ -122,3 +122,36 @@ searchButton.addEventListener("click", function () {
   hasSearched = true;
   renderCharacters();
 });
+
+//* Modal//*
+
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("myModal");
+  form.addEventListener("submit", contact);
+  
+  const modal = document.getElementById(".modal");
+  const closeModal = document.querySelector(".close");
+
+  suggestion.addEventListener("click", () => {
+    modal.classList.add("modal--open");
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.classList.remove("modal--open");
+    document
+      .querySelector(".modal__overlay--success")
+      .classList.remove("modal__overlay--visible");
+    document
+      .querySelector(".modal__overlay--loading")
+      .classList.remove("modal__overlay--visible");
+  });
+});
+
+let isModalOpen = false;
+function toggleModal() {
+    if (isModalOpen) {
+        return document.body.classList.remove("modal--open");
+    }
+    isModalOpen = true;
+    document.body.classList += " modal--open";
+}
