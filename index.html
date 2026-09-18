@@ -10,22 +10,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<section>
 <nav class="test">
     <ul class="nav-list">
-        <li class="nav__link">
-            <a href="suggestion" class="nav__link--anchor" onclick="toggleModal()">Unsure Who to Search For?</a></li>
+        <li>
+            <a href="#suggestion" class="nav__link--anchor">Need a Suggestion?</a>
+        </li>
     </ul>
 </nav>    
-
-<div class="modal" id="suggestion">
-    <p class="modal__para">Try these names:</p>
-    <p class="modal__list">Skywalker</p>
-    <p class="modal__list">Han Solo</p>
-    <p class="modal__list">Leia Organa</p>
-    <p class="modal__list">Padme Amidala</p>
-
-</div>
-
+</section>
 <section class="opening">
     <div class="test">
     <div>
@@ -67,11 +60,24 @@
 </div>
     <!-- characters -->
     <div id="results"> 
-        <div character-card></div>
+        <div character-card>
+            <div id="image-container"></div>
+        </div>
     </div>
     </section>
 <section class="footer">
-    <p> &copy; 2024 Star Wars Character Archive. All rights reserved.</p>
+    <p class="foot__title">Try these names:</p>
+    <div class="suggestion" id="suggestion">
+    <p class="foot__list">Skywalker</p>
+    <p class="foot__list">Han Solo</p>
+    <p class="foot__list">Leia Organa</p>
+    <p class="foot__list">Padme Amidala</p>
+    <p class="foot__list">Darth Vader</p>
+    <p class="foot__list">Jabba</p>
+    <p class="foot__list">Greedo</p>
+    <p class="foot__list">Palpatine</p>
+</div>
+    <p class="copyright"> &copy; 2024 Star Wars Character Archive. All rights reserved.</p>
 </section>
         <script src="script.js"></script>
 </body>

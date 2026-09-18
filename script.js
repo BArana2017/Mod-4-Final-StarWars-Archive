@@ -123,35 +123,47 @@ searchButton.addEventListener("click", function () {
   renderCharacters();
 });
 
-//* Modal//*
+// Character Images
+const imageContainer = document.getElementById('image-container');
+const img = document.createElement('img');
+img.src = 'assets/HanSolo.webp';
+img.alt = 'Han Solo';
+imageContainer.appendChild(img);
 
-document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("myModal");
-  form.addEventListener("submit", contact);
-  
-  const modal = document.getElementById(".modal");
-  const closeModal = document.querySelector(".close");
+// Set CSS styles directly
+img.style.width = '150px';  // Set the width
+img.style.border = '2px solid black';  // Add a border
+img.style.borderRadius = '10px';  // Add rounded corners
 
-  suggestion.addEventListener("click", () => {
-    modal.classList.add("modal--open");
-  });
+// Define a mapping of characters to their image paths
+const characterImages = {
+    'Han Solo': 'assets/HanSolo.webp',
+    // Add more characters and their respective image paths here
+};
 
-  closeModal.addEventListener("click", () => {
-    modal.classList.remove("modal--open");
-    document
-      .querySelector(".modal__overlay--success")
-      .classList.remove("modal__overlay--visible");
-    document
-      .querySelector(".modal__overlay--loading")
-      .classList.remove("modal__overlay--visible");
-  });
-});
+// Function to handle the search
+function handleSearch() {
+    const searchInput = document.getElementById('search-input').value;
+    const imageContainer = document.getElementById('image-container');
 
-let isModalOpen = false;
-function toggleModal() {
-    if (isModalOpen) {
-        return document.body.classList.remove("modal--open");
+    // Clear the image container
+    imageContainer.innerHTML = '';
+
+    // Check if the character exists in the mapping
+    if (characterImages[searchInput]) {
+        // Create an img element
+        const img = document.createElement('img');
+        img.src = characterImages[searchInput];
+        img.alt = searchInput;
+
+        // Append the image to the container
+        imageContainer.appendChild(img);
+    } else {
+        imageContainer.innerHTML = '<p>Character not found!</p>';
     }
-    isModalOpen = true;
-    document.body.classList += " modal--open";
 }
+
+// Attach event listener to the search button
+document.getElementById('search-button').addEventListener('click', handleSearch);
+
+
