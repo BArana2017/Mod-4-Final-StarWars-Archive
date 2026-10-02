@@ -6,12 +6,6 @@ const maxValue = document.getElementById("maxValue");
 
 const progress = document.getElementById("progress");
 
-const characterImages = {
-  "luke": "./assets/luke.jpg",
-  "leia": "./assets/leia.jpg",
-};
-
-
 function updateSlider() {
   let min = parseInt(minRange.value);
   let max = parseInt(maxRange.value);
@@ -172,3 +166,22 @@ function handleSearch() {
 // Attach event listener to the search button
 document.getElementById('search-button').addEventListener('click', handleSearch);
 
+const characterImages = {
+  "Luke": "./assets/Luke.jpg",
+  "Leia": "./assets/Leia.jpg",
+  "Han": "./assets/HanSolo.webp",
+  "Anakin": "./assets/Anakin.jpg",
+  "Padme": "./assets/Padme.jpg",
+  "Schmi": "./assets/Schmi.jpg",
+  "Vader": "./assets/Vader.jpg",
+  "Palpatine": "./assets/Palpatine.jpg",
+  "Jabba": "./assets/Jabba.jpg",
+  "Greedo": "./assets/Greedo.jpg",
+};
+
+const image = characterImages[character.name.toLowerCase()] || "./assets/default.jpg";
+
+resultHTML = `
+  <img src="${image}" alt="${character.name}">
+  <h2>${character.name}</h2>
+`;
