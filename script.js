@@ -6,6 +6,12 @@ const maxValue = document.getElementById("maxValue");
 
 const progress = document.getElementById("progress");
 
+const characterImages = {
+  "luke": "./assets/luke.jpg",
+  "leia": "./assets/leia.jpg",
+};
+
+
 function updateSlider() {
   let min = parseInt(minRange.value);
   let max = parseInt(maxRange.value);
@@ -165,5 +171,4 @@ function handleSearch() {
 
 // Attach event listener to the search button
 document.getElementById('search-button').addEventListener('click', handleSearch);
-
 
