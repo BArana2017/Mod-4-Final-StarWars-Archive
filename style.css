@@ -6,9 +6,25 @@
     font-family: "Inter", system-ui;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fa-solid {
+    background-color:white;
+    border-radius: 5px;
+    font-size: 48px;
+    margin: auto 32px;
+    padding: 1px 0px 0px 0px;
+    width: 45px;
+    height: 50px;
+}
+
 .nav-list {
-    display: flex;
     justify-content: right;
+    display: flex;
     gap: 32px;
     padding: 32px 0px;
     margin-right: 32px;
@@ -17,7 +33,7 @@
     }
 
 .nav__link--anchor {
-    color: yellow;
+      color: yellow;
     font-size: 16px;
     text-decoration: none;
     position: relative;
