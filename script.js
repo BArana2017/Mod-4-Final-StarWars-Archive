@@ -123,46 +123,6 @@ searchButton.addEventListener("click", function () {
   renderCharacters();
 });
 
-// Character Images
-const imageContainer = document.getElementById('image-container');
-const img = document.createElement('img');
-img.src = 'assets/HanSolo.webp';
-img.alt = 'Han Solo';
-imageContainer.appendChild(img);
-
-// Set CSS styles directly
-img.style.width = '150px';  // Set the width
-img.style.border = '2px solid black';  // Add a border
-img.style.borderRadius = '10px';  // Add rounded corners
-
-// Define a mapping of characters to their image paths
-const characterImages = {
-    'Han Solo': 'assets/HanSolo.webp',
-    // Add more characters and their respective image paths here
-};
-
-// Function to handle the search
-function handleSearch() {
-    const searchInput = document.getElementById('search-input').value;
-    const imageContainer = document.getElementById('image-container');
-
-    // Clear the image container
-    imageContainer.innerHTML = '';
-
-    // Check if the character exists in the mapping
-    if (characterImages[searchInput]) {
-        // Create an img element
-        const img = document.createElement('img');
-        img.src = characterImages[searchInput];
-        img.alt = searchInput;
-
-        // Append the image to the container
-        imageContainer.appendChild(img);
-    } else {
-        imageContainer.innerHTML = '<p>Character not found!</p>';
-    }
-}
-
 // Attach event listener to the search button
 document.getElementById('search-button').addEventListener('click', handleSearch);
 
@@ -185,3 +145,8 @@ resultHTML = `
   <img src="${image}" alt="${character.name}">
   <h2>${character.name}</h2>
 `;
+
+// Set CSS styles directly
+img.style.width = '150px';  // Set the width
+img.style.border = '2px solid black';  // Add a border
+img.style.borderRadius = '10px';  // Add rounded corners
