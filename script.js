@@ -92,9 +92,13 @@ function renderCharacters() {
   });
 
   // Build the HTML for filtered characters
-  const html = filteredCharacters.map(character => 
-    `<p class="character-card">${character.name}</p>`
-  ).join("");
+  const html = filteredCharacters.map(character => {
+    const image = characterImages[character.name];
+    return `<div class="character-card">
+      ${image ? `<img src="${image}" alt="${character.name}">` : ""}
+      <p>${character.name}</p>
+    </div>`;
+  }).join("");
 
   results.innerHTML = html;
 }
@@ -124,18 +128,17 @@ searchButton.addEventListener("click", function () {
 });
 
 // Attach event listener to the search button
-document.getElementById('search-button').addEventListener('click', handleSearch);
 
 const characterImages = {
-  "Luke": "./assets/Luke.jpg",
-  "Leia": "./assets/Leia.jpg",
-  "Han": "./assets/HanSolo.webp",
-  "Anakin": "./assets/Anakin.jpg",
-  "Padme": "./assets/Padme.jpg",
-  "Schmi": "./assets/Schmi.jpg",
-  "Vader": "./assets/Vader.jpg",
+  "Luke Skywalker": "./assets/Luke.jpg",
+  "Leia Organa": "./assets/Leia.jpg",
+  "Han Solo": "./assets/HanSolo.webp",
+  "Anakin Skywalker": "./assets/Anakin.jpg",
+  "Padmé Amidala": "./assets/Padme.jpg",
+  "Shmi Skywalker": "./assets/Schmi.jpeg",
+  "Darth Vader": "./assets/Vader.jpg",
   "Palpatine": "./assets/Palpatine.jpg",
-  "Jabba": "./assets/Jabba.jpg",
+  "Jabba Desilijic Tiure": "./assets/Jabba.jpg",
   "Greedo": "./assets/Greedo.jpg",
 };
 
