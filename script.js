@@ -141,15 +141,3 @@ const characterImages = {
   "Jabba Desilijic Tiure": "./assets/Jabba.jpg",
   "Greedo": "./assets/Greedo.jpg",
 };
-
-const image = characterImages[character.name.toLowerCase()] || "./assets/default.jpg";
-
-resultHTML = `
-  <img src="${image}" alt="${character.name}">
-  <h2>${character.name}</h2>
-`;
-
-// Set CSS styles directly
-img.style.width = '150px';  // Set the width
-img.style.border = '2px solid black';  // Add a border
-img.style.borderRadius = '10px';  // Add rounded corners
