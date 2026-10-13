@@ -322,5 +322,26 @@ img {
     height: 250px;
     border-radius: 8px;
     margin: auto;
-  
+  }
+
+
+@media (max-width: 768px) {
+      @media screen {
+
+    .container{
+      height: auto;
+      margin: 250px 0px 80px 0px;
+    }
+
+    
+
+    #searchinput {
+      max-width: auto;
+    }
+
+    .site {
+      margin: 0px auto;
+      text-align: center;
+    }
+  }
 }
