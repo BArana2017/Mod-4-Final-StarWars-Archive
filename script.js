@@ -136,7 +136,7 @@ function handleSearch(event) {
         })
         .then(data => {
             characters = data; // Store the fetched characters
-            
+            results.innerHTML = ""; // Clear previous results
             // Delay the display of results by 2 seconds
             setTimeout(() => {
                 document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner
