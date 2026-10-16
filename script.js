@@ -103,32 +103,6 @@ function renderCharacters() {
   results.innerHTML = html;
 }
 
-// Fetch characters from API
-fetch("https://swapi.info/api/people")
-  .then(function (response) {
-    if (!response.ok) {
-      throw new Error("bad request");
-    }
-    return response.json();
-  })
-  .then(function (data) {
-    characters = data;
-  })
-  .catch(function (error) {
-    console.log(error);
-    if (hasSearched) {
-      results.innerHTML =
-        "<p class='character-card'>Unable to load characters.</p>";
-    }
-  });
-
-searchButton.addEventListener("click", function () {
-  hasSearched = true;
-  renderCharacters();
-});
-
-// Attach event listener to the search button
-
 const characterImages = {
   "Luke Skywalker": "./assets/Luke.jpg",
   "Leia Organa": "./assets/Leia.jpg",
@@ -142,12 +116,38 @@ const characterImages = {
   "Greedo": "./assets/Greedo.jpg",
 };
 
-function handleSearch() {
-  document.getElementById('loading-spinner').style.display = 'block';
+// Fetch characters from API
+searchButton.addEventListener("click", function (event) {
+    hasSearched = true; // Set that a search has occurred
+    handleSearch(event); // Call the handleSearch function
+});
+
+function handleSearch(event) {
+    event.preventDefault(); // Prevent the default form submission
+    document.getElementById('loading-spinner').style.display = 'block'; // Show the loading spinner
+
+    // Fetch data from the API
+    fetch("https://swapi.info/api/people")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Bad request");
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            characters = data; // Store the fetched characters
+            
+            // Delay the display of results by 2 seconds
+            setTimeout(() => {
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner
+                renderCharacters(); // Call your function to render characters
+            }, 2000); // 2000 milliseconds = 2 seconds
+        })
+        .catch(error => {
+            console.log(error);
+            if (hasSearched) {
+                results.innerHTML =
+                    "<p class='character-card'>Unable to load characters.</p>";
+            }
+        });
 }
-
-setTimeout(() => {
-  document.getElementById('loading-spinner').style.display = 'none';
-}, 2000);
-
-document.getElementById('search-button').addEventListener('click', handleSearch);
