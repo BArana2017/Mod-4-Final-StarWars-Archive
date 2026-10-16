@@ -134,6 +134,25 @@
   color: #fff;
 }
 
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #00f0ff;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 /* Panel */
 .container {
   background: rgba(20, 20, 30, 0.9);
@@ -270,6 +289,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 #results {
   display: flex;
+  margin-bottom: 100px;
 }
 
 /* Hover glow */
@@ -343,5 +363,6 @@ img {
       margin: 0px auto;
       text-align: center;
     }
+
   }
 }

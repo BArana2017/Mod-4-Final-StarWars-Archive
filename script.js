@@ -141,3 +141,13 @@ const characterImages = {
   "Jabba Desilijic Tiure": "./assets/Jabba.jpg",
   "Greedo": "./assets/Greedo.jpg",
 };
+
+function handleSearch() {
+  document.getElementById('loading-spinner').style.display = 'block';
+}
+
+setTimeout(() => {
+  document.getElementById('loading-spinner').style.display = 'none';
+}, 2000);
+
+document.getElementById('search-button').addEventListener('click', handleSearch);
