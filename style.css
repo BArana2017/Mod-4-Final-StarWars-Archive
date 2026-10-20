@@ -357,15 +357,34 @@ img {
       margin: 250px 0px 80px 0px;
     }
 
-    
+    .search-bar {
+      display: flex;
+      flex-direction: column;
+    }
 
-    #searchinput {
-      max-width: auto;
+    #searchInput {
+      max-width: 350px;
+      margin-bottom: 80px;
+    }
+
+    #searchButton {
+      width: 350px;
+      height: 50px;
+      left: 0%;
+      margin-top: 50px;
     }
 
     .site {
       margin: 0px auto;
       text-align: center;
+    }
+
+    #maxValue, #minValue {
+      display: none;
+    }
+
+    .search {
+      margin-top: 10px;
     }
 
   }

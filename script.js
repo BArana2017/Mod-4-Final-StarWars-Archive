@@ -78,10 +78,8 @@ function renderCharacters() {
   const allowedFilmIds = getAllowedFilmIds();
 
   let filteredCharacters = characters.filter(character => {
-    // Check if character's name matches the search
     const matchesName = character.name.toLowerCase().includes(search);
     
-    // Check if character appears in any of the allowed films
     const hasRightFilm = character.films.some(filmUrl => {
       const filmParts = filmUrl.split("/").filter(Boolean);
       const movieId = parseInt(filmParts[filmParts.length - 1]);
@@ -91,7 +89,6 @@ function renderCharacters() {
     return matchesName && hasRightFilm;
   });
 
-  // Build the HTML for filtered characters
   const html = filteredCharacters.map(character => {
     const image = characterImages[character.name];
     return `<div class="character-card">
@@ -118,13 +115,13 @@ const characterImages = {
 
 // Fetch characters from API
 searchButton.addEventListener("click", function (event) {
-    hasSearched = true; // Set that a search has occurred
-    handleSearch(event); // Call the handleSearch function
+    hasSearched = true; 
+    handleSearch(event);
 });
 
 function handleSearch(event) {
-    event.preventDefault(); // Prevent the default form submission
-    document.getElementById('loading-spinner').style.display = 'block'; // Show the loading spinner
+    event.preventDefault(); 
+    document.getElementById('loading-spinner').style.display = 'block';
 
     // Fetch data from the API
     fetch("https://swapi.info/api/people")
@@ -132,16 +129,16 @@ function handleSearch(event) {
             if (!response.ok) {
                 throw new Error("Bad request");
             }
-            return response.json(); // Parse the JSON response
+            return response.json();
         })
         .then(data => {
-            characters = data; // Store the fetched characters
-            results.innerHTML = ""; // Clear previous results
-            // Delay the display of results by 2 seconds
+            characters = data;
+            results.innerHTML = ""; 
+            
             setTimeout(() => {
-                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner
-                renderCharacters(); // Call your function to render characters
-            }, 2000); // 2000 milliseconds = 2 seconds
+                document.getElementById('loading-spinner').style.display = 'none'; 
+                renderCharacters(); 
+            }, 2000); 
         })
         .catch(error => {
             console.log(error);
